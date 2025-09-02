@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Calculadora de agua</h1>
+    <p>Descubra quanta agua voce precisa beber por dia</p>
+</body>
+<script>
+
+const nome = prompt("Digite seu nome")
+    const paciente = {
+        nome:null ,
+        idade:null ,
+        peso:null ,
+        agua:null ,
+        "precisabeber": function() {
+            const recomendado = this.peso * 0.035
+            const bebeu = this.agua >= recomendado.
+            alert(bebeu)
+        }        
+}
+
+const paciente1 = new paciente()
+alert(paciente1.precisabeber())
+                        
+
+const pacientes = [
+    new paciente("Ana", 75, 19, 500),
+    new paciente("Joao", 118, 35, 3000),
+    new paciente("Maria", 90, 40, 1500),
+    new paciente("85" ,"pedro", 2000, 45)
+    ]
+    for (let p of pacientes) {
+        alert(p.nome + "bebeu" + p.precisabeber())
+        
+    }
+
+
+
+</script>
+</html>
