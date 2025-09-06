@@ -1,45 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculadora de Água</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            padding: 30px;
+            background-color: #e0f7fa;
+        }
+        h1 {
+            color: #007acc;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            margin: 10px 0;
+            width: 250px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #005f86;
+        }
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            background: #b2ebf2;
+            padding: 15px;
+            border-radius: 8px;
+            width: fit-content;
+        }
+    </style>
 </head>
 <body>
-    <h1>Calculadora de agua</h1>
-    <p>Descubra quanta agua voce precisa beber por dia</p>
-</body>
+    <h1>Calculadora de Água</h1>
+    <p>Descubra quanta água você precisa beber por dia</p>
+
+    <input type="text" id="nome" placeholder="Nome" required><br>
+    <input type="number" id="idade" placeholder="Idade (anos)" required><br>
+    <input type="number" id="peso" placeholder="Peso (kg)" required><br>
+    <input type="number" id="altura" placeholder="Altura (cm)" required><br>
+    <input type="number" id="agua" placeholder="Água já bebida (ml)" required><br>
+
+    <button id="calcularBtn" type="button">Calcular</button>
+
+    <div id="resultado" style="display:none;"></div>
+
 <script>
-
-const nome = prompt("Digite seu nome")
-    const paciente = {
-        nome:null ,
-        idade:null ,
-        peso:null ,
-        agua:null ,
-        "precisabeber": function() {
-            const recomendado = this.peso * 0.035
-            const bebeu = this.agua >= recomendado.
-            alert(bebeu)
-        }        
-}
-
-const paciente1 = new paciente()
-alert(paciente1.precisabeber())
-                        
-
-const pacientes = [
-    new paciente("Ana", 75, 19, 500),
-    new paciente("Joao", 118, 35, 3000),
-    new paciente("Maria", 90, 40, 1500),
-    new paciente("85" ,"pedro", 2000, 45)
-    ]
-    for (let p of pacientes) {
-        alert(p.nome + "bebeu" + p.precisabeber())
-        
+class Paciente {
+    constructor(nome, peso, idade, altura, agua) {
+        this.nome = nome;
+        this.peso = peso;
+        this.idade = idade;
+        this.altura = altura;
+        this.agua = agua;
     }
 
+    // cálculo padrão: 35 ml por kg de peso
+    precisabeber() {
+        const recomendado = this.peso * 35; // ml
+        const falta = recomendado - this.agua;
 
+        if (falta > 0) {
+            return `${this.nome}, sua meta é ${recomendado} ml de água por dia. 
+            Você ainda precisa beber ${falta.toFixed(0)} ml hoje.`;
+        } else {
+            return `Parabéns ${this.nome}! 🎉 Você já atingiu a meta de ${recomendado} ml de água por dia.`;
+        }
+    }
+}
 
+document.getElementById("calcularBtn").addEventListener("click", function() {
+    const nome = document.getElementById("nome").value;
+    const idade = Number(document.getElementById("idade").value);
+    const peso = Number(document.getElementById("peso").value);
+    const altura = Number(document.getElementById("altura").value);
+    const agua = Number(document.getElementById("agua").value);
+
+    const resultadoDiv = document.getElementById("resultado");
+
+    if (nome && idade && peso && altura && agua) {
+        const paciente1 = new Paciente(nome, peso, idade, altura, agua);
+        resultadoDiv.style.display = "block";
+        resultadoDiv.innerText = paciente1.precisabeber();
+    } else {
+        resultadoDiv.style.display = "block";
+        resultadoDiv.innerText = "⚠️ Por favor, preencha todos os campos.";
+    }
+});
 </script>
+</body>
 </html>
